@@ -44,6 +44,18 @@ const data = [
     return header;
   };
 
+  const createFooter = () => {
+    const footer = document.createElement('footer');
+    footer.classList.add('footer');
+
+    const footerContainer = createContainer();
+    footer.append(footerContainer);
+
+    footer.footerContainer = footerContainer;
+
+    return footer;
+  };
+
   const createLogo = title => {
     const h1 = document.createElement('h1');
     h1.classList.add('logo');
@@ -51,6 +63,15 @@ const data = [
 
     return h1;
   };
+
+  const createFooterLogo = title => {
+    const h1 = document.createElement('h1');
+    h1.classList.add('footer-logo');
+    h1.textContent = `Все права защищены Ⓒ${title}`;
+
+    return h1;
+  };
+
   const createMain = () => {
     const main = document.createElement('main');
 
@@ -147,8 +168,10 @@ const data = [
   };
 
   const renderPhoneBook = (app, title) => {
+    const footer = createFooter();
     const header = createHeader();
     const logo = createLogo(title);
+    const footerLogo = createFooterLogo(title);
     const main = createMain();
     const buttonGroup = createButtonsGroup([
       {
@@ -167,7 +190,8 @@ const data = [
 
     header.headerContainer.append(logo);
     main.mainContainer.append(buttonGroup.btnWrapper, table, form.overlay);
-    app.append(header, main);
+    app.append(header, main, footer);
+    footer.footerContainer.append(footerLogo);
 
     return {
       list: table.tbody,
