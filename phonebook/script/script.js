@@ -205,6 +205,13 @@ const data = [
   const createRow = ({name: firstName, surname, phone}) => {
     const tr = document.createElement('tr');
 
+    const tdChange = document.createElement('td');
+    tdChange.classList.add('change');
+    const buttonChange = document.createElement('button');
+    buttonChange.classList.add('button-change');
+    buttonChange.textContent = 'Редактировать';
+    tdChange.append(buttonChange);
+
     const tdDel = document.createElement('td');
     tdDel.classList.add('delete');
     const buttonDel = document.createElement('button');
@@ -224,7 +231,7 @@ const data = [
     tr.phoneLink = phoneLink;
     tdPhone.append(phoneLink);
 
-    tr.append(tdDel, tdName, tdSurname, tdPhone);
+    tr.append(tdDel, tdName, tdSurname, tdPhone, tdChange);
 
     return tr;
   };
