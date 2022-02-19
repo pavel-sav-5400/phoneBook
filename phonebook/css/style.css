@@ -10,6 +10,13 @@ body {
   text-align: center;
 }
 
+.button-change {
+  width: auto;
+  height: auto;
+  color: #700a20;
+  border: none;
+ }
+
 .logo {
   font-size: 32px;
   font-weight: bold;
