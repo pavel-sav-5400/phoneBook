@@ -259,6 +259,9 @@ const data = [
 
     hoverRow(allRow, logo);
 
+    const btnClose = document.querySelector('.close');
+    const btnReset = document.querySelector('.btn-danger');
+
     btnAdd.addEventListener('click', () => {
       formOverlay.classList.add('is-visible');
     });
@@ -268,6 +271,9 @@ const data = [
     });
 
     formOverlay.addEventListener('click', () => {
+      formOverlay.classList.remove('is-visible');
+    });
+    btnClose.addEventListener('click', () => {
       formOverlay.classList.remove('is-visible');
     });
   };
