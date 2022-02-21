@@ -299,7 +299,7 @@ const data = [
 
   const addContactPage = (contact, list) => {
     list.append(createRow(contact));
-  }
+  };
 
   const formControl = (form, list, closeModal) => {
     form.addEventListener('submit', e => {
@@ -307,6 +307,7 @@ const data = [
       const formData = new FormData(e.target);
 
       const newContact = Object.fromEntries(formData);
+      console.log('newContact: ', newContact);
 
       addContactPage(newContact, list);
       addContactData(newContact);
