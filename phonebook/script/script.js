@@ -307,7 +307,6 @@ const data = [
       const formData = new FormData(e.target);
 
       const newContact = Object.fromEntries(formData);
-      console.log('newContact: ', newContact);
 
       addContactPage(newContact, list);
       addContactData(newContact);
