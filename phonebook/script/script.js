@@ -25,11 +25,6 @@ const data = [
 ];
 
 {
-  const addContactData = contact => {
-    data.push(contact);
-    console.log('data: ', data);
-  };
-
   const createContainer = () => {
     const container = document.createElement('div');
     container.classList.add('container');
@@ -191,10 +186,10 @@ const data = [
       },
     ]);
     const table = createTable();
-    const {form, overlay} = createForm();
+    const form = createForm();
 
     header.headerContainer.append(logo);
-    main.mainContainer.append(buttonGroup.btnWrapper, table, overlay);
+    main.mainContainer.append(buttonGroup.btnWrapper, table, form.overlay);
     app.append(header, main, footer);
     footer.footerContainer.append(footerLogo);
 
@@ -203,8 +198,8 @@ const data = [
       logo,
       btnAdd: buttonGroup.btns[0],
       btnDel: buttonGroup.btns[1],
-      formOverlay: overlay,
-      form,
+      formOverlay: form.overlay,
+      form: form.form,
     };
   };
 
@@ -262,28 +257,26 @@ const data = [
     });
   };
 
-  const modalControl = (btnAdd, formOverlay) => {
-    const openModal = () => {
-      formOverlay.classList.add('is-visible');
-    };
-    btnAdd.addEventListener('click', openModal);
+  const init = (selectorApp, title) => {
+    const app = document.querySelector(selectorApp);
+    const phoneBook = renderPhoneBook(app, title);
 
-    const closeModal = () => {
-      formOverlay.classList.remove('is-visible');
-    };
+    const {list, logo, btnAdd, formOverlay, form, btnDel} = phoneBook;
+    // Функционал
+    const allRow = renderContacts(list, data);
+
+    hoverRow(allRow, logo);
+
+    btnAdd.addEventListener('click', () => {
+      formOverlay.classList.add('is-visible');
+    });
 
     formOverlay.addEventListener('click', e => {
       const target = e.target;
       if (target === formOverlay || target.closest('.close')) {
-        closeModal();
+        formOverlay.classList.remove('is-visible');
       }
     });
-    return {
-      closeModal,
-    };
-  };
-
-  const deleteControl = (btnDel, list) => {
     btnDel.addEventListener('click', () => {
       document.querySelectorAll('.delete').forEach(del => {
         del.classList.toggle('is-visible');
@@ -295,44 +288,6 @@ const data = [
         target.closest('.contact').remove();
       }
     });
-  };
-
-  const addContactPage = (contact, list) => {
-    list.append(createRow(contact));
-  };
-
-  const formControl = (form, list, closeModal) => {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const formData = new FormData(e.target);
-
-      const newContact = Object.fromEntries(formData);
-
-      addContactPage(newContact, list);
-      addContactData(newContact);
-      form.reset();
-      closeModal();
-    });
-  };
-
-  const init = (selectorApp, title) => {
-    const app = document.querySelector(selectorApp);
-
-    const {
-      list,
-      logo,
-      btnAdd,
-      formOverlay,
-      form,
-      btnDel,
-    } = renderPhoneBook(app, title);
-    // Функционал
-    const allRow = renderContacts(list, data);
-    const {closeModal} = modalControl(btnAdd, formOverlay);
-
-    hoverRow(allRow, logo);
-    deleteControl(btnDel, list);
-    formControl(form, list, closeModal);
   };
   window.phoneBookInit = init;
 }
