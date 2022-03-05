@@ -26,8 +26,8 @@ const data = [
 
 {
   const addContactData = contact => {
-    data.push(contact);
-    console.log('data: ', data);
+    localStorage.setItem('contacts', JSON.stringify([...contact]));
+    console.log(localStorage);
   };
 
   const createContainer = () => {
