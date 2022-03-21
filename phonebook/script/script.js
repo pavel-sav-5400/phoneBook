@@ -1,33 +1,27 @@
 /* eslint-disable no-unused-vars */
 'use strict';
 
-const data = [
-  {
-    name: 'Иван',
-    surname: 'Петров',
-    phone: '+79514545454',
-  },
-  {
-    name: 'Игорь',
-    surname: 'Семёнов',
-    phone: '+79999999999',
-  },
-  {
-    name: 'Семён',
-    surname: 'Иванов',
-    phone: '+79800252525',
-  },
-  {
-    name: 'Мария',
-    surname: 'Попова',
-    phone: '+79876543210',
-  },
-];
-
 {
+  const getStorage = () => (localStorage.getItem('contacts') ?
+  JSON.parse(localStorage.getItem('contacts')) : []);
+
+  const setStorage = contact =>
+    localStorage.setItem('contacts', JSON.stringify(contact));
+
+  const removeStorage = phone => {
+    const data = getStorage('contacts');
+    const newData = data.filter(item => {
+      if (item.phone === phone) {
+        item.splice(item.indexOf(item, 1));
+      }
+    });
+    setStorage(newData);
+  };
+
   const addContactData = contact => {
-    localStorage.setItem('contacts', JSON.stringify([...contact]));
-    console.log(localStorage);
+    const data = getStorage('contacts');
+    data.push(contact);
+    setStorage(data);
   };
 
   const createContainer = () => {
@@ -293,6 +287,7 @@ const data = [
       const target = e.target;
       if (target.closest('.del-icon')) {
         target.closest('.contact').remove();
+        removeStorage(target.dataset.phone);
       }
     });
   };
@@ -316,6 +311,7 @@ const data = [
   };
 
   const init = (selectorApp, title) => {
+    const data = getStorage();
     const app = document.querySelector(selectorApp);
 
     const {
