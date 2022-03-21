@@ -10,11 +10,7 @@
 
   const removeStorage = phone => {
     const data = getStorage('contacts');
-    const newData = data.filter(item => {
-      if (item.phone === phone) {
-        item.splice(item.indexOf(item, 1));
-      }
-    });
+    const newData = data.filter(item => item.phone !== phone);
     setStorage(newData);
   };
 
