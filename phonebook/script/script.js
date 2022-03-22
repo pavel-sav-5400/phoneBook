@@ -281,12 +281,14 @@
     });
     list.addEventListener('click', e => {
       const target = e.target;
+      const phone = target.closest('tr').querySelector('a').innerHTML;
       if (target.closest('.del-icon')) {
         target.closest('.contact').remove();
-        removeStorage(target.dataset.phone);
+        removeStorage(phone);
       }
     });
   };
+
 
   const addContactPage = (contact, list) => {
     list.append(createRow(contact));
