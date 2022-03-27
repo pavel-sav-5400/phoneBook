@@ -3,7 +3,7 @@ import {
   addContactData,
 }
   from './serviceStorage.js';
-import createRow from './createElements.js';
+import {createRow} from './createElements.js';
 const modalControl = (btnAdd, formOverlay) => {
   const openModal = () => {
     formOverlay.classList.add('is-visible');

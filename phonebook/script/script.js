@@ -5,7 +5,7 @@ import {
   hoverRow,
   formControl,
 } from './modules/control.js';
-import getStorage from './modules/serviceStorage.js';
+import {getStorage} from './modules/serviceStorage.js';
 
 {
   const init = (selectorApp, title) => {

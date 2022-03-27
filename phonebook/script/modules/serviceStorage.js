@@ -20,6 +20,5 @@ const addContactData = contact => {
 export {
   removeStorage,
   addContactData,
+  getStorage,
 };
-
-export default {getStorage};

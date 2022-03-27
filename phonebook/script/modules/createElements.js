@@ -178,7 +178,7 @@ const createRow = ({name: firstName, surname, phone}) => {
   return tr;
 };
 
-export default {
+export {
   createHeader,
   createFooter,
   createLogo,

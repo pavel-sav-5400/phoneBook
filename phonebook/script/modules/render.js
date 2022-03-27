@@ -1,4 +1,4 @@
-import create from './createElements.js';
+import * as create from './createElements.js';
 
 export const renderPhoneBook = (app, title) => {
   const footer = create.createFooter();
