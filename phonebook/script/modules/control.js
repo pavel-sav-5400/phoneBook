@@ -1,9 +1,23 @@
-import {
-  removeStorage,
-  addContactData,
-}
-  from './serviceStorage.js';
 import {createRow} from './createElements.js';
+import {addContactData, removeStorage} from './storage.js';
+
+const hoverRow = (allRow, logo) => {
+  const text = logo.textContent;
+
+  allRow.forEach(contact => {
+    contact.addEventListener('mouseenter', () => {
+      logo.textContent = contact.phoneLink.textContent;
+    });
+    contact.addEventListener('mouseleave', () => {
+      logo.textContent = text;
+    });
+  });
+};
+
+const addContactPage = (contact, list) => {
+  list.append(createRow(contact));
+};
+
 const modalControl = (btnAdd, formOverlay) => {
   const openModal = () => {
     formOverlay.classList.add('is-visible');
@@ -33,30 +47,13 @@ const deleteControl = (btnDel, list) => {
   });
   list.addEventListener('click', e => {
     const target = e.target;
+    const phone = target.closest('tr').querySelector('a').innerHTML;
     if (target.closest('.del-icon')) {
       target.closest('.contact').remove();
-      removeStorage(target.dataset.phone);
+      removeStorage(phone);
     }
   });
 };
-
-const addContactPage = (contact, list) => {
-  list.append(createRow(contact));
-};
-
-const hoverRow = (allRow, logo) => {
-  const text = logo.textContent;
-
-  allRow.forEach(contact => {
-    contact.addEventListener('mouseenter', () => {
-      logo.textContent = contact.phoneLink.textContent;
-    });
-    contact.addEventListener('mouseleave', () => {
-      logo.textContent = text;
-    });
-  });
-};
-
 const formControl = (form, list, closeModal) => {
   form.addEventListener('submit', e => {
     e.preventDefault();
@@ -70,10 +67,9 @@ const formControl = (form, list, closeModal) => {
     closeModal();
   });
 };
-
 export {
   modalControl,
   deleteControl,
-  hoverRow,
   formControl,
+  hoverRow,
 };

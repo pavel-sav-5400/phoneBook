@@ -1,4 +1,3 @@
-
 const getStorage = () => (localStorage.getItem('contacts') ?
   JSON.parse(localStorage.getItem('contacts')) : []);
 
@@ -18,7 +17,7 @@ const addContactData = contact => {
 };
 
 export {
+  getStorage,
   removeStorage,
   addContactData,
-  getStorage,
 };

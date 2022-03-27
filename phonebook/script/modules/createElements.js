@@ -1,4 +1,5 @@
 
+
 const createContainer = () => {
   const container = document.createElement('div');
   container.classList.add('container');
@@ -74,9 +75,7 @@ const createButtonsGroup = params => {
     btnWrapper,
     btns,
   };
-};
-
-const createTable = () => {
+}; const createTable = () => {
   const table = document.createElement('table');
   table.classList.add('table', 'table-striped');
 
@@ -142,7 +141,6 @@ const createForm = () => {
     form,
   };
 };
-
 const createRow = ({name: firstName, surname, phone}) => {
   const tr = document.createElement('tr');
   tr.classList.add('contact');
@@ -179,8 +177,8 @@ const createRow = ({name: firstName, surname, phone}) => {
 };
 
 export {
-  createHeader,
   createFooter,
+  createHeader,
   createLogo,
   createFooterLogo,
   createMain,
